@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "com.chaquo.python"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -80,6 +81,50 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        python {
+            buildPython "/usr/bin/python3"
+        }
+        python {
+            pip {
+                install "numpy"
+                install "matplotlib"
+                install "opencv-python"
+                install "Pillow"
+                install "mplot3d-dragger"
+                install "pandas"
+            }
+        }
+        ndk {
+            abiFilters  "arm64-v8a"
+            //   abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+        //  buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+
+        // if (isNewArchitectureEnabled()) {
+        //     // We configure the NDK build only if you decide to opt-in for the New Architecture.
+        //     externalNativeBuild {
+        //         ndkBuild {
+        //             arguments "APP_PLATFORM=android-21",
+        //                 "APP_STL=c++_shared",
+        //                 "NDK_TOOLCHAIN_VERSION=clang",
+        //                 "GENERATED_SRC_DIR=$buildDir/generated/source",
+        //                 "PROJECT_BUILD_DIR=$buildDir",
+        //                 "REACT_ANDROID_DIR=$rootDir/../node_modules/react-native/ReactAndroid",
+        //                 "REACT_ANDROID_BUILD_DIR=$rootDir/../node_modules/react-native/ReactAndroid/build",
+        //                 "NODE_MODULES_DIR=$rootDir/../node_modules"
+        //             cFlags "-Wall", "-Werror", "-fexceptions", "-frtti", "-DWITH_INSPECTOR=1"
+        //             cppFlags "-std=c++17"
+        //             // Make sure this target name is the same you specify inside the
+        //             // src/main/jni/Android.mk file for the `LOCAL_MODULE` variable.
+        //             targets "research_appmodules"
+        //         }
+        //     }
+        //     if (!enableSeparateBuildPerCPUArchitecture) {
+        //         ndk {
+        //             abiFilters (*reactNativeArchitectures())
+        //         }
+        //     }
+        // }
     }
     signingConfigs {
         debug {
